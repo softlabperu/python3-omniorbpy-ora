@@ -1,4 +1,4 @@
-Python Oracle + LDAP
+Python OmniOrbPY
 ======
 
 * Imagen docker de **debian** que tiene una pre-configuración para conectarse a una base de datos de Oracle.

@@ -30,15 +30,14 @@ RUN alien -i oracle-instantclient18.3-basic-18.3.0.0.0-3.x86_64.rpm && \
     ln -s /usr/bin/sqlplus64 /usr/bin/sqlplus && \
     rm -f /*.rpm
 
-RUN curl -LO http://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.1.6/omniORB-4.1.6.tar.bz2 && tar -xjvf omniORB-4.1.6.tar.bz2
-WORKDIR /omniORB-4.1.6/build
+RUN curl -LO http://downloads.sourceforge.net/project/omniorb/omniORB/omniORB-4.1.6/omniORB-4.1.6.tar.bz2 && tar -xjvf omniORB-4.1.6.tar.bz2 -C /opt
+WORKDIR /opt/omniORB-4.1.6/build
 RUN ../configure
 RUN make
 RUN make install
 
-RUN curl -LO http://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-3.6/omniORBpy-3.6.tar.bz2 && tar -xjvf omniORBpy-3.6.tar.bz2
-WORKDIR /omniORBpy-3.6/build
+RUN curl -LO http://downloads.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-3.6/omniORBpy-3.6.tar.bz2 && tar -xjvf omniORBpy-3.6.tar.bz2 -C /opt
+WORKDIR /opt/omniORBpy-3.6/build
 RUN ../configure --prefix=/usr/local/bin --with-omniorb=/usr/local
 RUN make
 RUN make install
-
