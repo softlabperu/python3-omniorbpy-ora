@@ -1,4 +1,7 @@
-FROM debian
+FROM debian:10
+
+RUN DEBIAN_FRONTEND="noninteractive" 
+RUN apt-get update && apt-get install -y tzdata
 
 RUN apt-get update && \
     apt-get install -y \
@@ -6,7 +9,6 @@ RUN apt-get update && \
     git \
     alien \
     nginx \
-    tzdata \
     python \
     libaio1 \
     python3 \
