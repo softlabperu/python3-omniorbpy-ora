@@ -1,22 +1,17 @@
-FROM debian:10
+FROM python:3.7
 
 RUN DEBIAN_FRONTEND="noninteractive" 
 RUN apt-get update && apt-get install -y tzdata
 
 RUN apt-get update && \
     apt-get install -y \
-    vim \
     git \
     alien \
     nginx \
-    python \
+    omniorb \
     libaio1 \
-    python3 \
-    python-dev \
     supervisor \
     libssl-dev \
-    python3-dev \
-    python3-pip \
     libsasl2-dev \
     libldap2-dev \
     default-libmysqlclient-dev && \
@@ -33,13 +28,13 @@ RUN alien -i oracle-instantclient18.3-basic-18.3.0.0.0-3.x86_64.rpm && \
     rm -f /*.rpm
 
 RUN curl -LO https://razaoinfo.dl.sourceforge.net/project/omniorb/omniORB/omniORB-4.2.3/omniORB-4.2.3.tar.bz2 && tar -xjvf omniORB-4.2.3.tar.bz2 -C /opt
-WORKDIR /opt/omniORB-4.2.3/build
-RUN ../configure
+WORKDIR /opt/omniORB-4.2.3
+RUN ./configure
 RUN make
 RUN make install
 
 RUN curl -LO https://ufpr.dl.sourceforge.net/project/omniorb/omniORBpy/omniORBpy-4.2.3/omniORBpy-4.2.3.tar.bz2 && tar -xjvf omniORBpy-4.2.3.tar.bz2 -C /opt
-WORKDIR /opt/omniORBpy-4.2.3/build
-RUN ../configure --prefix=/usr/local/bin --with-omniorb=/usr/local
+WORKDIR /opt/omniORBpy-4.2.3
+RUN ./configure --with-omniorb=/usr/local
 RUN make
 RUN make install
