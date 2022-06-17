@@ -6,14 +6,19 @@ RUN apt-get update && apt-get install -y tzdata
 RUN apt-get update && \
     apt-get install -y \
     git \
+    php \
+    xvfb \
     alien \
     nginx \
     omniorb \
     libaio1 \
     supervisor \
     libssl-dev \
+    libgconf-2-4 \
     libsasl2-dev \
     libldap2-dev \
+    libpango-1.0-0 \
+    libpangoft2-1.0-0 \
     default-libmysqlclient-dev && \
     rm -rf /var/lib/apt/lists/*
 
